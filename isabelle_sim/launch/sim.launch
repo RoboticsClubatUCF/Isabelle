@@ -1,0 +1,39 @@
+<launch>
+    <param name="/use_sim_time" value="true" />
+    <!-- configure any CLI arguments -->
+    <arg name = "robot_desc" default = "$(find isabelle)/models/isabelle/model.sdfls"/>
+    <arg name = "world" default = "empty"/>
+    <arg name = "gazebo" default = "true" />
+
+    <!-- launch gazebo_ros -->
+    <include file = "$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name = "world_name" value = "$(find isabelle)/worlds/$(arg world).world"/>
+        <arg name = "paused" value = "false"/>
+        <arg name = "use_sim_time" value = "true"/>
+        <arg name = "gui" value ="$(arg gazebo)"/>
+        <arg name = "recording" value = "false"/>
+        <arg name = "debug" value = "false"/>
+        <arg name = "verbose" value = "true"/>
+    </include>
+
+    <!-- load robot description to parameter server (for robot_state_publisher) -->
+    <param name = "robot_description" textfile = "$(arg robot_desc)"/>
+    <!-- use robot description to publish robot tf tree -->
+    <node name = "robot_state_publisher" pkg = "robot_state_publisher" type = "robot_state_publisher">
+        <param name = "tf_prefix" type = "string" value = "isabelle"/>
+    </node>
+
+    <!-- publish tf transforms between joints -->
+    <node name = "joint_state_publisher" pkg = "joint_state_publisher" type = "joint_state_publisher"/>
+
+    <!-- We need to specify which localization package we're using-->
+
+
+    <!-- launch rviz with specified configuration (if CLI arg is true)-->
+
+    <!-- slam_toolbox generates map in real-time as robot moves around (SLAM)-->
+
+    <!-- publishes the pose (geometry_msgs/PoseWithCovarianceStamped) of robot from simulation plugin (nav_msgs/Odometry) -->
+    <!-- <node pkg="ugv_sim" type="pose_publisher.py" name="pose_publisher" output="screen" /> -->
+
+</launch> 
