@@ -1,5 +1,5 @@
 <?xml version = "1.0" ?>
-<!---TODO: Finish this with links for wheels, the links and joints of the sensors, and the chassis --->
+<!--TODO: Finish this with links for wheels, the links and joints of the sensors, and the chassis -->
 <robot name="isabelle"/>
     <joint name ="back_left_wheel_hinge" type = "revolute">
         <parent link = "isabelle/chassis"/>

@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <sdf version='1.4'>
-<!---TODO: Add IMU sensor --->
+<!---TODO: Add IMU sensor -->
   <model name="isabelle">
         <static>false</static>
           <link name='chassis'>
@@ -27,12 +27,7 @@
         <collision name="collision">
           <geometry>
             <cylinder>
-              <radius>.07</radius>
-              <length>.05</length>
-            </cylinder>
-          </geometry>
-        </collision>
-        <visual name="visual">
+              <radius>.07</radius>  <frameName>isabelle/dc_link</frameName> <!
           <geometry>
             <cylinder>
               <radius>.07</radius>
@@ -136,6 +131,38 @@
       <uri>model://depth_camera</uri>
       <pose>0.2 0 0.1 0 0 0</pose>
     </include>
+
+    <link name = "imu_link">
+      <visual name = "imu_visual">
+        <geometry>
+          <box>
+            <size> 0.01 0.01 0.01 </size>
+          </box>
+        </geometery>
+      </visual>
+      <collision name = "imu_collision">
+        <geometery>
+          <box>
+            <size> 0.01 0.01 0.01 </size>
+          </box>
+        </geometery>
+      </collsision>
+
+      <sensor name = "imu_sensor" type = "imu">
+        <always_on>true</always_on>
+        <plugin filename = "libgazebo_ros_imu_sensor.so" name = "imu_plugin">
+          <robotNamespace>isabelle</robotNamespace>
+          <topicName>imu</topicName>
+          <updateRateHZ>30</updateRateHZ>
+          <frameName>imu_link</frameName>
+          <initialOrientationAsReference>false</initialOrientationAsReference>
+        </plugin>
+      </sensor>
+    </link>
+    <joint name ="imu_joint" type ="fixed">
+      <parent>chassis</parent>
+      <child>imu_link</child>
+    </joint>
     
     <joint name="dc_joint" type="fixed">
       <child>dc_link</child>
@@ -189,9 +216,8 @@
             <p2>0.0</p2>
             <center>0.0 0.0</center>
           </distortion>
-       </camera>
-       
-       <plugin name="isabelle_dc_plugin" filename="libgazebo_ros_depth_camera.so">
+        </camera>
+        <plugin name = "isabelle_dc_plugin" filename ="libgazebo_ros_depth_camera.so">
                     <robotNamespace>isabelle</robotNamespace>
                     <always_on>true</always_on>
                     <updateRate>0.0</updateRate> <!-- use sensor rate -->
@@ -209,7 +235,7 @@
                     <pointCloudTopicName>depth/points</pointCloudTopicName>
 
                     <!-- Set TF frame name. If empty, defaults to link name (i.e. "link_name") -->
-                    <frameName>isabelle/dc_link</frameName> <!-- namespaced -->
+                    <frameName>dc_link</frameName> <!-- namespaced -->
                     
                     <distortionK1>0.0</distortionK1>
                     <distortionK2>0.0</distortionK2>
@@ -217,7 +243,32 @@
                     <distortionT1>0.0</distortionT1>
                     <distortionT2>0.0</distortionT2>
        </plugin>
-      </sensor>  
+      </sensor>
     </link>
+    <plugin name = "differential_drive_controller" filename = "libgazebo_ros_diff_drive.so">
+      <always_on>true</always_on>
+      <rosDebugLevel>debug</rosDebugLevel>
+
+      <updateRate>20</updateRate>
+      <leftJoint>back_left_wheel_hinge</leftJoint>
+      <rightJoint>front_left_wheel_hinge</leftJoint>
+      <rightJoint>back_right_wheel_hinge</rightJoint> 
+      <rightJoint>front_right_wheel_hinge</rightJoint>
+      <wheelSeparation>0.4</wheelSeparation>
+      <torque>20</torque>
+
+      <odometrySource>world</odometrySource> 
+      <publishOdom>true</publishOdom> 
+      <updateRate>100</updateRate>
+
+
+      <publishTf>true</publishTf>
+      <publishOdomTF>true</publishOdomTF>
+      <publishWheelTF>true</publishWheelTF>
+      <commandTopic>/cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <robotBaseFrame>chassis</robotBaseFrame>
+    </plugin>
+      
   </model>
 </sdf>
