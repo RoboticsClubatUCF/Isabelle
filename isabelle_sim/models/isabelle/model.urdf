@@ -52,7 +52,7 @@
         <inertial>
             <mass value = "2.25"/>
             <origin xyz = "0 0 0" rpy = "0 0 0"/>
-            <inertia ixx = ".0322" ixy = "0", ixz = "0" iyy = ".0378" izz = "0.01"/>
+            <inertia ixx = ".0322" ixy = "0", ixz = "0" iyy = ".0378" izz = "0.01"/> <!-- inertias are tricky: http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model#Joint_Dynamics-->
         <inertial>
 
         <collision name='collision'>
