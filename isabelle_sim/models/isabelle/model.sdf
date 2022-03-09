@@ -1,6 +1,5 @@
 <?xml version='1.0'?>
 <sdf version='1.4'>
-<!---TODO: Add IMU sensor -->
   <model name="isabelle">
         <static>false</static>
           <link name='chassis'>
@@ -22,6 +21,7 @@
               </geometry>
             </visual>
           </link>
+       
       <link name="back_left_wheel">
         <pose>0.1 0.13 0.1 0 1.5707 1.5707</pose>
         <collision name="collision">
@@ -36,6 +36,7 @@
           </geometry>
         </visual>
       </link>
+
       <link name="back_right_wheel">
         <pose>0.1 -0.13 0.1 0 1.5707 1.5707</pose>
         <collision name="collision">
@@ -55,6 +56,7 @@
           </geometry>
         </visual>
       </link>
+
       <link name="front_left_wheel">
         <pose>-0.1 0.13 0.1 0 1.5707 1.5707</pose>
         <collision name="collision">
@@ -74,6 +76,7 @@
           </geometry>
         </visual>
       </link>
+
       <link name="front_right_wheel">
         <pose>-0.1 -0.13 0.1 0 1.5707 1.5707</pose>
         <collision name="collision">
@@ -93,6 +96,7 @@
           </geometry>
         </visual>
       </link>
+
       <joint type="revolute" name="back_left_wheel_hinge">
         <pose>0 0 -0.03 0 0 0</pose>
         <child>back_left_wheel</child>
@@ -110,6 +114,7 @@
           <xyz>0 1 0</xyz>
         </axis>
       </joint>
+
       <joint type="revolute" name="front_left_wheel_hinge">
         <pose>0 0 -0.03 0 0 0</pose>
         <child>front_left_wheel</child>
@@ -260,7 +265,6 @@
       <odometrySource>world</odometrySource> 
       <publishOdom>true</publishOdom> 
       <updateRate>100</updateRate>
-
 
       <publishTf>true</publishTf>
       <publishOdomTF>true</publishOdomTF>

@@ -1,32 +1,77 @@
 <?xml version = "1.0" ?>
-<!--TODO: Finish this with links for wheels, the links and joints of the sensors, and the chassis -->
+<!--TODO: Finish this with links for wheels, and the links and joints of the sensors -->
 <robot name="isabelle"/>
     <joint name ="back_left_wheel_hinge" type = "revolute">
-        <parent link = "isabelle/chassis"/>
-        <child link = "isabelle/back_left_wheel"/>
+        <parent link = "chassis"/>
+        <child link = "back_left_wheel"/>
         <origin xyz ="0.1 0.13 0.1 0 1.5707 1.5707" rpy = "0 0 0"/>
         <axis xyz = "0 1 0"/>
         <limit lower = "0" upper = "0" effort = "0" velocty = "0"/>
     </joint>
+
     <joint name ="back_right_wheel_hinge" type = "revolute">
-        <parent link = "isabelle/chassis"/>
-        <child link = "isabelle/back_right_wheel"/>
+        <parent link = "chassis"/>
+        <child link = "back_right_wheel"/>
         <origin xyz ="0.1 -0.13 0.1 0 1.5707 1.5707" rpy = "0 0 0"/>
         <axis xyz = "0 1 0"/>
         <limit lower = "0" upper = "0" effort = "0" velocty = "0"/>
     </joint>
+
     <joint name ="front_left_wheel_hinge" type = "revolute">
-        <parent link = "isabelle/chassis"/>
-        <child link = "isabelle/front_left_wheel"/>
+        <parent link = "chassis"/>
+        <child link = "front_left_wheel"/><collision name='collision'>
+              <geometry>
+                <box>
+                  <size>.4 .2 .1</size>
+                </box>
+              </geometry>
+            </collision>
+
+            <visual name='visual'>
+              <geometry>
+                <box>
+                  <size>.4 .2 .1</size>
+                </box>
+              </geometry>
+            </visual>
+          </link>
         <origin xyz ="-0.1 0.13 0.1 0 1.5707 1.5707" rpy = "0 0 0"/>
         <axis xyz = "0 1 0"/>
         <limit lower = "0" upper = "0" effort = "0" velocty = "0"/>
     </joint>
+
     <joint name ="front_right_wheel_hinge" type = "revolute">
-        <parent link = "isabelle/chassis"/>
-        <child link = "isabelle/front_right_wheel"/>
+        <parent link = "chassis"/>
+        <child link = "front_right_wheel"/>
         <origin xyz ="-0.1 -0.13 0.1 0 1.5707 1.5707" rpy = "0 0 0"/>
         <axis xyz = "0 1 0"/>
         <limit lower = "0" upper = "0" effort = "0" velocty = "0"/>
     </joint>
+
+    <link name ="chassis">
+        <inertial>
+            <mass value = "2.25"/>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+            <inertia ixx = ".0322" ixy = "0", ixz = "0" iyy = ".0378" izz = "0.01"/>
+        <inertial>
+
+        <collision name='collision'>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+            <geometry>
+            <box>
+                <size>.4 .2 .1</size>
+            </box>
+            </geometry>
+        </collision>
+
+        <visual name='visual'>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+            <geometry>
+            <box>
+                <size>.4 .2 .1</size>
+            </box>
+            </geometry>
+        </visual>
+    </link>
+
 </robot>
