@@ -1,13 +1,13 @@
 <launch>
     <param name="/use_sim_time" value="true" />
     <!-- configure any CLI arguments -->
-    <arg name = "robot_desc" default = "$(find isabelle)/models/isabelle/model.sdfls"/>
+    <arg name = "robot_desc" default = "$(find isabelle_sim)/models/isabelle/model.urdf"/>
     <arg name = "world" default = "empty"/>
     <arg name = "gazebo" default = "true" />
 
     <!-- launch gazebo_ros -->
     <include file = "$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name = "world_name" value = "$(find isabelle)/worlds/$(arg world).world"/>
+        <arg name = "world_name" value = "$(find isabelle_sim)/worlds/$(arg world).world"/>
         <arg name = "paused" value = "false"/>
         <arg name = "use_sim_time" value = "true"/>
         <arg name = "gui" value ="$(arg gazebo)"/>

@@ -1,6 +1,7 @@
 <?xml version = "1.0" ?>
-<!--TODO: Finish this with links for wheels, and the links and joints of the sensors -->
-<robot name="isabelle"/>
+<!--TODO: Finish the links and joints of the sensors -->
+<robot name="isabelle">
+    
     <joint name ="back_left_wheel_hinge" type = "revolute">
         <parent link = "chassis"/>
         <child link = "back_left_wheel"/>
@@ -19,22 +20,7 @@
 
     <joint name ="front_left_wheel_hinge" type = "revolute">
         <parent link = "chassis"/>
-        <child link = "front_left_wheel"/><collision name='collision'>
-              <geometry>
-                <box>
-                  <size>.4 .2 .1</size>
-                </box>
-              </geometry>
-            </collision>
-
-            <visual name='visual'>
-              <geometry>
-                <box>
-                  <size>.4 .2 .1</size>
-                </box>
-              </geometry>
-            </visual>
-          </link>
+        <child link = "front_left_wheel"/>    
         <origin xyz ="-0.1 0.13 0.1 0 1.5707 1.5707" rpy = "0 0 0"/>
         <axis xyz = "0 1 0"/>
         <limit lower = "0" upper = "0" effort = "0" velocty = "0"/>
@@ -48,11 +34,11 @@
         <limit lower = "0" upper = "0" effort = "0" velocty = "0"/>
     </joint>
 
-    <link name ="chassis">
+    <link name = "chassis">
         <inertial>
             <mass value = "2.25"/>
             <origin xyz = "0 0 0" rpy = "0 0 0"/>
-            <inertia ixx = ".0322" ixy = "0", ixz = "0" iyy = ".0378" izz = "0.01"/> <!-- inertias are tricky: http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model#Joint_Dynamics-->
+            <inertia ixx = ".0322" ixy = "0" ixz = "0" iyy = ".0378" izz = "0.01"/> <!-- inertias are tricky: http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model#Joint_Dynamics-->
         <inertial>
 
         <collision name='collision'>
@@ -72,6 +58,118 @@
             </box>
             </geometry>
         </visual>
+    </link>
+
+    <link name = "back_left_wheel">
+      
+      <inertial>
+        <mass value = ".045"/>
+        <origin xyz = "0 0 0" rpy = "0 0 0"/>
+        <inertia ixx = ".00007" ixy = "0" ixz = "0" iyy = ".00007" iyz = "0" izz = ".000018375"/>
+      </inertial>
+
+      <collision name = "back_left_wheel_collision"/>
+        <origin = "0 0 0" rpy = "-1.5707 0 0"/>
+        <geometery>
+        <cylinder>
+          <radius>.07</radius>
+          <length>.05</length>
+        </cylinder>
+      </collision>
+
+      <visual name = "back_left_wheel_visual">
+        <origin xyz = "0 0 0" rpy = "-3.14159 0 0"/>
+        <geometery>
+        <cylinder>
+          <radius>.07</radius>
+          <length>.05</length>
+        </cylinder>
+      </visual> 
+
+    </link>
+
+    <link name = "back_right_wheel">
+      
+      <inertial>
+        <mass value = ".045"/>
+        <origin xyz = "0 0 0" rpy = "0 0 0"/>
+        <inertia ixx = ".00007" ixy = "0" ixz = "0" iyy = ".00007" iyz = "0" izz = ".000018375"/>
+      </inertial>
+      
+      <collision name = "back_right_wheel_collision"/>
+        <origin = "0 0 0" rpy = "-1.5707 0 0"/>
+        <geometery>
+        <cylinder>
+          <radius>.07</radius>
+          <length>.05</length>
+        </cylinder>
+      </collision>
+      
+      <visual name = "back_left_wheel_visual">
+        <origin xyz = "0 0 0" rpy = "-3.14159 0 0"/>
+        <geometery>
+        <cylinder>
+          <radius>.07</radius>
+          <length>.05</length>
+        </cylinder>
+      </visual> 
+    
+    </link>
+
+    <link name = "front_left_wheel">
+      
+      <inertial>
+        <mass value = ".045"/>
+        <origin xyz = "0 0 0" rpy = "0 0 0"/>
+        <inertia ixx = ".00007" ixy = "0" ixz = "0" iyy = ".00007" iyz = "0" izz = ".000018375"/>
+      </inertial>
+      
+      <collision name = "front_left_wheel_collision"/>
+        <origin = "0 0 0" rpy = "-1.5707 0 0"/>
+        <geometery>
+        <cylinder>
+          <radius>.07</radius>
+          <length>.05</length>
+        </cylinder>
+      </collision>
+      
+      <visual name = "front_left_wheel_visual">
+        <origin xyz = "0 0 0" rpy = "-3.14159 0 0"/>
+        <geometery>
+        <cylinder>
+          <radius>.07</radius>
+          <length>.05</length>
+        </cylinder>
+      </visual> 
+   
+    </link>
+  
+    <link name = "front_right_wheel">
+      
+      <inertial>
+        <mass value = ".045"/>
+        <origin xyz = "0 0 0" rpy = "0 0 0"/>
+        <inertia ixx = ".00007" ixy = "0" ixz = "0" iyy = ".00007" iyz = "0" izz = ".000018375"/>
+      </inertial>
+      
+      <collision name = "front_right_wheel_collision"/>
+        <origin = "0 0 0" rpy = "-1.5707 0 0"/>
+        <geometery>
+        <cylinder>
+          <radius>.07</radius>
+          <length>.05</length>
+        </cylinder>
+      </collision>
+      
+      <visual name = "front_right_wheel_visual">
+        <origin xyz = "0 0 0" rpy = "-3.14159 0 0"/>
+        <geometery>
+        <cylinder>
+          <radius>.07</radius>
+          <length>.05</length>
+        </cylinder>
+      </visual>
+    
     </link>
 
 </robot>
