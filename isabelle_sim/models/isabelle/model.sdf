@@ -1,13 +1,14 @@
 <?xml version='1.0'?>
 <sdf version="1.5">
   <model name="isabelle">
+  
         <pose>0 0 0 0 0 0</pose>
         <static>false</static>
           <link name="chassis">
             <collision name="collision">
               <geometry>
                 <box>
-                  <size>.4 .2 .1</size>
+                  <size>.254 .1524 .04</size>
                 </box>
               </geometry>
             </collision>
@@ -15,20 +16,20 @@
             <visual name="visual">
               <geometry>
                 <box>
-                  <size>.4 .2 .1</size>
+                  <size>.254 .1524 .04</size>
                 </box>
               </geometry>
             </visual>
           </link>
        
       <link name="back_left_wheel">
-        <pose>0.12 0.0762 0.2 0 1.5707 1.5707</pose>
+        <pose>-.09779 -.09 -.01079 0 1.5707 1.5707</pose>
         
         <collision name="collision">
           <geometry>
             <cylinder>
-              <radius>.07</radius>
-              <length>.05</length>
+              <radius>.02921</radius>
+              <length>.0254</length>
             </cylinder>
           </geometry>
         </collision>
@@ -36,8 +37,8 @@
         <visual name="visual">
           <geometry>
             <cylinder>
-              <radius>.07</radius>
-              <length>.05</length>
+              <radius>.02921</radius>
+              <length>.0254</length>
             </cylinder>
           </geometry>
         </visual>
@@ -45,13 +46,13 @@
       </link>
 
       <link name="back_right_wheel">
-        <pose>0.12 -0.0762 0.2 0 1.5707 1.5707</pose>
+        <pose>-.09779 .09 -.01079  0 1.5707 1.5707</pose>
         
         <collision name="collision">
           <geometry>
             <cylinder>
-              <radius>.07</radius>
-              <length>.05</length>
+              <radius>.02921</radius>
+              <length>.0254</length>
             </cylinder>
           </geometry>
         </collision>
@@ -59,8 +60,8 @@
         <visual name="visual">
           <geometry>
             <cylinder>
-              <radius>.07</radius>
-              <length>.05</length>
+              <radius>.02921</radius>
+              <length>.0254</length>
             </cylinder>
           </geometry>
         </visual>
@@ -68,13 +69,13 @@
       </link>
 
       <link name="front_left_wheel">
-        <pose>-0.12 0.0762 0.2 0 1.5707 1.5707</pose>
+        <pose>.09779 -0.09 -.01079 0 1.5707 1.5707</pose>
         
         <collision name="collision">
           <geometry>
             <cylinder>
-              <radius>.07</radius>
-              <length>.05</length>
+              <radius>.02921</radius>
+              <length>.0254</length>
             </cylinder>
           </geometry>
         </collision>
@@ -82,8 +83,8 @@
         <visual name="visual">
           <geometry>
             <cylinder>
-              <radius>.07</radius>
-              <length>.05</length>
+              <radius>.02921</radius>
+              <length>.0254</length>
             </cylinder>
           </geometry>
         </visual>
@@ -91,13 +92,13 @@
       </link>
 
       <link name="front_right_wheel">
-        <pose>-0.12 -0.0762 0.2 0 1.5707 1.5707</pose>
+        <pose>.09779 0.09 -.01079 0 1.5707 1.5707</pose>
         
         <collision name="collision">
           <geometry>
             <cylinder>
-              <radius>.07</radius>
-              <length>.05</length>
+              <radius>.02921</radius>
+              <length>.0254</length>
             </cylinder>
           </geometry>
         </collision>
@@ -105,8 +106,8 @@
         <visual name="visual">
           <geometry>
             <cylinder>
-              <radius>.07</radius>
-              <length>.05</length>
+              <radius>.02921</radius>
+              <length>.0254</length>
             </cylinder>
           </geometry>
         </visual>
@@ -114,7 +115,6 @@
       </link>
 
       <joint type="revolute" name="back_left_wheel_hinge">
-        <pose>-0.12 0.0762 0.2 0 0</pose>
         <child>back_left_wheel</child>
         <parent>chassis</parent>
         <axis>
@@ -125,7 +125,6 @@
       </joint>
 
       <joint type="revolute" name="back_right_wheel_hinge">
-        <pose>0.12 -0.0762 0.2 0 0 0</pose>
         <child>back_right_wheel</child>
         <parent>chassis</parent>
         <axis>
@@ -136,7 +135,6 @@
       </joint>
 
       <joint type="revolute" name="front_left_wheel_hinge">
-        <pose>-0.12 0.0762 0.2 0 0 0</pose>
         <child>front_left_wheel</child>
         <parent>chassis</parent>
         <axis>
@@ -147,7 +145,6 @@
       </joint>
 
       <joint type="revolute" name="front_right_wheel_hinge">
-        <pose>-0.12 -0.0762 0.2 0 0 0</pose>
         <child>front_right_wheel</child>
         <parent>chassis</parent>
         <axis>
@@ -294,7 +291,7 @@
       <leftJoint>front_left_wheel_hinge</leftJoint>
       <rightJoint>back_right_wheel_hinge</rightJoint> 
       <rightJoint>front_right_wheel_hinge</rightJoint>
-      <wheelSeparation>0.4</wheelSeparation>
+      <wheelSeparation>0.1524</wheelSeparation>
       <torque>20</torque>
 
       <odometrySource>world</odometrySource> 
