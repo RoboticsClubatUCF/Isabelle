@@ -1,11 +1,10 @@
 <?xml version='1.0'?>
-<sdf version='1.4'>
+<sdf version="1.5">
   <model name="isabelle">
+        <pose>0 0 0 0 0 0</pose>
         <static>false</static>
-          <link name='chassis'>
-            <pose>0 0 .1 0 0 0</pose>
-
-            <collision name='collision'>
+          <link name="chassis">
+            <collision name="collision">
               <geometry>
                 <box>
                   <size>.4 .2 .1</size>
@@ -13,7 +12,7 @@
               </geometry>
             </collision>
 
-            <visual name='visual'>
+            <visual name="visual">
               <geometry>
                 <box>
                   <size>.4 .2 .1</size>
@@ -23,11 +22,18 @@
           </link>
        
       <link name="back_left_wheel">
-        <pose>0.1 0.13 0.1 0 1.5707 1.5707</pose>
+        <pose>0.12 0.0762 0.2 0 1.5707 1.5707</pose>
+        
         <collision name="collision">
           <geometry>
             <cylinder>
-              <radius>.07</radius>  <frameName>isabelle/dc_link</frameName> <!
+              <radius>.07</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+
+        <visual name="visual">
           <geometry>
             <cylinder>
               <radius>.07</radius>
@@ -35,10 +41,12 @@
             </cylinder>
           </geometry>
         </visual>
+
       </link>
 
       <link name="back_right_wheel">
-        <pose>0.1 -0.13 0.1 0 1.5707 1.5707</pose>
+        <pose>0.12 -0.0762 0.2 0 1.5707 1.5707</pose>
+        
         <collision name="collision">
           <geometry>
             <cylinder>
@@ -47,6 +55,7 @@
             </cylinder>
           </geometry>
         </collision>
+        
         <visual name="visual">
           <geometry>
             <cylinder>
@@ -55,10 +64,12 @@
             </cylinder>
           </geometry>
         </visual>
+      
       </link>
 
       <link name="front_left_wheel">
-        <pose>-0.1 0.13 0.1 0 1.5707 1.5707</pose>
+        <pose>-0.12 0.0762 0.2 0 1.5707 1.5707</pose>
+        
         <collision name="collision">
           <geometry>
             <cylinder>
@@ -67,6 +78,7 @@
             </cylinder>
           </geometry>
         </collision>
+        
         <visual name="visual">
           <geometry>
             <cylinder>
@@ -75,10 +87,12 @@
             </cylinder>
           </geometry>
         </visual>
+      
       </link>
 
       <link name="front_right_wheel">
-        <pose>-0.1 -0.13 0.1 0 1.5707 1.5707</pose>
+        <pose>-0.12 -0.0762 0.2 0 1.5707 1.5707</pose>
+        
         <collision name="collision">
           <geometry>
             <cylinder>
@@ -87,6 +101,7 @@
             </cylinder>
           </geometry>
         </collision>
+        
         <visual name="visual">
           <geometry>
             <cylinder>
@@ -95,63 +110,74 @@
             </cylinder>
           </geometry>
         </visual>
+      
       </link>
 
       <joint type="revolute" name="back_left_wheel_hinge">
-        <pose>0 0 -0.03 0 0 0</pose>
+        <pose>-0.12 0.0762 0.2 0 0</pose>
         <child>back_left_wheel</child>
         <parent>chassis</parent>
         <axis>
           <xyz>0 1 0</xyz>
+          <use_parent_model_frame>true</use_parent_model_frame>
         </axis>
+
       </joint>
 
       <joint type="revolute" name="back_right_wheel_hinge">
-        <pose>0 0 0.03 0 0 0</pose>
+        <pose>0.12 -0.0762 0.2 0 0 0</pose>
         <child>back_right_wheel</child>
         <parent>chassis</parent>
         <axis>
           <xyz>0 1 0</xyz>
+          <use_parent_model_frame>true</use_parent_model_frame>
         </axis>
+      
       </joint>
 
       <joint type="revolute" name="front_left_wheel_hinge">
-        <pose>0 0 -0.03 0 0 0</pose>
+        <pose>-0.12 0.0762 0.2 0 0 0</pose>
         <child>front_left_wheel</child>
         <parent>chassis</parent>
         <axis>
           <xyz>0 1 0</xyz>
+          <use_parent_model_frame>true</use_parent_model_frame>
         </axis>
+      
       </joint>
 
       <joint type="revolute" name="front_right_wheel_hinge">
-        <pose>0 0 0.03 0 0 0</pose>
+        <pose>-0.12 -0.0762 0.2 0 0 0</pose>
         <child>front_right_wheel</child>
         <parent>chassis</parent>
         <axis>
           <xyz>0 1 0</xyz>
+          <use_parent_model_frame>true</use_parent_model_frame>
         </axis>
+      
       </joint>
-    <include>
+    
+    <!-- <include>
       <uri>model://depth_camera</uri>
       <pose>0.2 0 0.1 0 0 0</pose>
-    </include>
-
+    </include> -->
     <link name = "imu_link">
+      <pose> 0 0 0.1</pose>
       <visual name = "imu_visual">
         <geometry>
           <box>
             <size> 0.01 0.01 0.01 </size>
           </box>
-        </geometery>
+        </geometry>
       </visual>
+      
       <collision name = "imu_collision">
-        <geometery>
+        <geometry>
           <box>
             <size> 0.01 0.01 0.01 </size>
           </box>
-        </geometery>
-      </collsision>
+        </geometry>
+      </collision>
 
       <sensor name = "imu_sensor" type = "imu">
         <always_on>true</always_on>
@@ -164,6 +190,7 @@
         </plugin>
       </sensor>
     </link>
+    
     <joint name ="imu_joint" type ="fixed">
       <parent>chassis</parent>
       <child>imu_link</child>
@@ -172,31 +199,37 @@
     <joint name="dc_joint" type="fixed">
       <child>dc_link</child>
       <parent>chassis</parent>
+      <axis>
+          <xyz>1 0 0</xyz>
+          <use_parent_model_frame>true</use_parent_model_frame>
+      </axis>
     </joint>
     
     <link name = "dc_link">
       <pose>0.2 0 0.1 0 0 0</pose>
       <collision name = "dc_collision">
       	<pose> 0.2 0 0.1 0 0</pose>
-        <geometery> 
+        <geometry> 
           <box> 
           <size> 0.02 0.1016 0.02 </size> 
           </box> 
-        </geometery> 
+        </geometry> 
       </collision> 
       
       <visual name = "dc_visual">
         <pose> 0.2 0 0.1 0 0 </pose>
-        <geometery> 
+        <geometry> 
         	<box> 
           	<size> 0.02 0.1016 0.02 </size> 
           </box> 
-        </geometery>
+        </geometry>
+        
         <material>
         	<script> 
         	<color>Gazebo Grey</color> 
         	</script>
         </material>
+      
       </visual>
       
       <sensor type = "depth" name = "depth_camera">      	
@@ -222,10 +255,11 @@
             <center>0.0 0.0</center>
           </distortion>
         </camera>
+        
         <plugin name = "isabelle_dc_plugin" filename ="libgazebo_ros_depth_camera.so">
                     <robotNamespace>isabelle</robotNamespace>
                     <always_on>true</always_on>
-                    <updateRate>0.0</updateRate> <!-- use sensor rate -->
+                    <updateRate>20</updateRate> <!-- use sensor rate -->
                     <cameraName>isabelle_dc</cameraName>
 
                     <baseline>0.05</baseline>
@@ -233,7 +267,7 @@
                     <pointCloudCutoffMax>20</pointCloudCutoffMax>
 
                     <!-- configure output topics; will be prepended with robotNamespace value (AKA relative names) -->
-                    <imageTopicName>image/image</imageTopicName>
+                    <imageTopicName>image</imageTopicName>
                     <cameraInfoTopicName>image/camera_info</cameraInfoTopicName>
                     <depthImageTopicName>depth/image</depthImageTopicName>
                     <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
@@ -250,13 +284,14 @@
        </plugin>
       </sensor>
     </link>
+
     <plugin name = "differential_drive_controller" filename = "libgazebo_ros_diff_drive.so">
       <always_on>true</always_on>
       <rosDebugLevel>debug</rosDebugLevel>
 
       <updateRate>20</updateRate>
       <leftJoint>back_left_wheel_hinge</leftJoint>
-      <rightJoint>front_left_wheel_hinge</leftJoint>
+      <leftJoint>front_left_wheel_hinge</leftJoint>
       <rightJoint>back_right_wheel_hinge</rightJoint> 
       <rightJoint>front_right_wheel_hinge</rightJoint>
       <wheelSeparation>0.4</wheelSeparation>
@@ -273,6 +308,5 @@
       <odometryTopic>odom</odometryTopic>
       <robotBaseFrame>chassis</robotBaseFrame>
     </plugin>
-      
   </model>
 </sdf>
