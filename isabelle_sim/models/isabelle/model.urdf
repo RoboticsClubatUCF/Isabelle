@@ -5,7 +5,7 @@
     <joint name ="back_left_wheel_hinge" type = "revolute">
         <parent link = "chassis"/>
         <child link = "back_left_wheel"/>
-        <origin xyz ="-.09779 -.09 -.01079" rpy = "0 0 0"/>
+        <origin xyz ="-.09779 -.0762 -.01079" rpy = "0 0 0"/>
         <axis xyz = "0 1 0"/>
         <limit lower = "0" upper = "0" effort = "0" velocity = "0"/>
     </joint>
@@ -13,7 +13,7 @@
     <joint name ="back_right_wheel_hinge" type = "revolute">
         <parent link = "chassis"/>
         <child link = "back_right_wheel"/>
-        <origin xyz ="-.09779 .09 -.01079" rpy = "0 0 0"/>
+        <origin xyz ="-.09779 .0762 -.01079" rpy = "0 0 0"/>
         <axis xyz = "0 1 0"/>
         <limit lower = "0" upper = "0" effort = "0" velocity = "0"/>
     </joint>
@@ -21,7 +21,7 @@
     <joint name ="front_left_wheel_hinge" type = "revolute">
         <parent link = "chassis"/>
         <child link = "front_left_wheel"/>    
-        <origin xyz =".09779 -0.09 -.01079" rpy = "0 0 0"/>
+        <origin xyz =".09779 -.0762 -.01079" rpy = "0 0 0"/>
         <axis xyz = "0 1 0"/>
         <limit lower = "0" upper = "0" effort = "0" velocity = "0"/>
     </joint>
@@ -29,17 +29,17 @@
     <joint name ="front_right_wheel_hinge" type = "revolute">
         <parent link = "chassis"/>
         <child link = "front_right_wheel"/>
-        <origin xyz =".09779 0.09 -.01079" rpy = "0 0 0"/>
+        <origin xyz =".09779 .0762 -.01079" rpy = "0 0 0"/>
         <axis xyz = "0 1 0"/>
         <limit lower = "0" upper = "0" effort = "0" velocity = "0"/>
     </joint>
 
     <link name = "chassis">
-        <inertial>
+        <!--<inertial>
             <mass value = "2.25"/>
             <origin xyz = "0 0 0" rpy = "0 0 0"/>
-            <inertia ixx = ".0322" ixy = "0" ixz = "0" iyy = ".0378" iyz = "0" izz = "0.01"/> <!-- inertias are tricky: http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model#Joint_Dynamics-->
-        </inertial>
+            <inertia ixx = ".0322" ixy = "0" ixz = "0" iyy = ".0378" iyz = "0" izz = "0.01"/> < inertias are tricky: http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model#Joint_Dynamics
+        </inertial>-->
 
         <collision name="collision">
             <origin xyz = "0 0 0" rpy = "0 0 0"/>

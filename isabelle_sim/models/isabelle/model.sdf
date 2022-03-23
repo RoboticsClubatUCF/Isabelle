@@ -121,7 +121,14 @@
           <xyz>0 1 0</xyz>
           <use_parent_model_frame>true</use_parent_model_frame>
         </axis>
-
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0.000000</cfm>
+              <erp>0.900000</erp>
+            </limit>
+          </ode>
+        </physics>
       </joint>
 
       <joint type="revolute" name="back_right_wheel_hinge">
@@ -131,6 +138,14 @@
           <xyz>0 1 0</xyz>
           <use_parent_model_frame>true</use_parent_model_frame>
         </axis>
+          <physics>
+            <ode>
+              <limit>
+                <cfm>0.000000</cfm>
+                <erp>0.900000</erp>
+              </limit>
+            </ode>
+          </physics>
       
       </joint>
 
@@ -141,6 +156,14 @@
           <xyz>0 1 0</xyz>
           <use_parent_model_frame>true</use_parent_model_frame>
         </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0.000000</cfm>
+              <erp>0.900000</erp>
+            </limit>
+          </ode>
+        </physics>
       
       </joint>
 
@@ -151,6 +174,14 @@
           <xyz>0 1 0</xyz>
           <use_parent_model_frame>true</use_parent_model_frame>
         </axis>
+        <physics>
+          <ode>
+            <limit>
+                <cfm>0.000000</cfm>
+                <erp>0.900000</erp>
+            </limit>
+          </ode>
+        </physics>
       
       </joint>
     
@@ -282,7 +313,8 @@
       </sensor>
     </link>
 
-    <plugin name = "differential_drive_controller" filename = "libgazebo_ros_diff_drive.so">
+    <!-- <plugin name = "differential_drive_controller" filename = "libgazebo_ros_diff_drive.so">
+      <robotBaseFrame>isabelle</robotBaseFrame>
       <always_on>true</always_on>
       <rosDebugLevel>debug</rosDebugLevel>
 
@@ -299,11 +331,31 @@
       <updateRate>100</updateRate>
 
       <publishTf>true</publishTf>
-      <publishOdomTF>true</publishOdomTF>
+      <publishOdomTF>false</publishOdomTF>
       <publishWheelTF>true</publishWheelTF>
       <commandTopic>/cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
+      <robotBaseFrame>isabelle</robotBaseFrame>
+    </plugin> -->
+    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <robotNamespace>isabelle</robotNamespace>
+      <rosDebugLevel>debug</rosDebugLevel>
+
+      <leftFrontJoint>front_left_wheel_hinge</leftFrontJoint>
+      <rightFrontJoint>front_right_wheel_hinge</rightFrontJoint>
+      <leftRearJoint>back_left_wheel_hinge</leftRearJoint>
+      <rightRearJoint>back_right_wheel_hinge</rightRearJoint>
+      <wheelSeparation>0.1524</wheelSeparation>
+      <wheelDiameter>0.215</wheelDiameter>
+      <torque>20</torque>
+
+      <odometrySource>world</odometrySource> 
+      <publishOdom>true</publishOdom> 
+      <updateRate>100</updateRate>
+
       <robotBaseFrame>chassis</robotBaseFrame>
-    </plugin>
+      <topicName>cmd_vel</topicName>
+      <broadcastTF>true</broadcastTF>
+  </plugin>
   </model>
 </sdf>
