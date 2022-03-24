@@ -20,14 +20,13 @@
     <param name = "robot_description" textfile = "$(arg robot_desc)"/>
     <!-- use robot description to publish robot tf tree -->
     <node name = "robot_state_publisher" pkg = "robot_state_publisher" type = "robot_state_publisher">
-        <param name = "tf_prefix" type = "string" value = "isabelle"/>
+        <param name = "tf_prefix_" type = "string" value = "isabelle"/>
     </node>
 
     <!-- publish tf transforms between joints -->
     <node name = "joint_state_publisher" pkg = "joint_state_publisher" type = "joint_state_publisher"/>
 
     <!-- We need to specify which localization package we're using-->
-
 
     <!-- launch rviz with specified configuration (if CLI arg is true)-->
 

@@ -67,14 +67,14 @@
       <collision name = "collision">
         <origin xyz = "0 0 0" rpy = "-1.5707 0 0"/>
         <geometry>
-            <cylinder radius = ".07" length = ".05"/>
+            <cylinder radius = ".02921" length = ".0254"/>
         </geometry>
       </collision>
 
       <visual name = "visual">
-        <origin xyz = "0 0 0" rpy = "-3.14159 0 0"/>
+        <origin xyz = "0 0 0" rpy = "-1.5707 0 0"/>
         <geometry>
-          <cylinder radius = ".07" length = ".05"/>
+          <cylinder radius = ".02921" length = ".0254"/>
         </geometry>
       </visual> 
 
@@ -91,14 +91,14 @@
       <collision name = "collision">
         <origin xyz = "0 0 0" rpy = "-1.5707 0 0"/>
         <geometry>
-            <cylinder radius = ".07" length = ".05"/>
+            <cylinder radius = ".02921" length = ".0254"/>
         </geometry>
       </collision>
       
       <visual name = "visual">
-        <origin xyz = "0 0 0" rpy = "-3.14159 0 0"/>
+        <origin xyz = "0 0 0" rpy = "-1.5707 0 0"/>
         <geometry>
-            <cylinder radius = ".07" length = ".05"/>
+            <cylinder radius = ".02921" length = ".0254"/>
         </geometry>
       </visual> 
     
@@ -115,14 +115,14 @@
       <collision name = "collision">
         <origin xyz = "0 0 0" rpy = "-1.5707 0 0"/>
         <geometry>
-          <cylinder radius = ".07" length = ".05"/>
+          <cylinder radius = ".02921" length = ".0254"/>
         </geometry>
       </collision>
       
       <visual name = "visual">
-        <origin xyz = "0 0 0" rpy = "-3.14159 0 0"/>
+        <origin xyz = "0 0 0" rpy = "-1.5707 0 0"/>
         <geometry>
-          <cylinder radius = ".07" length = ".05"/>
+          <cylinder radius = ".02921" length = ".0254"/>
         </geometry>
       </visual> 
    
@@ -139,14 +139,14 @@
       <collision name = "collision">
         <origin xyz = "0 0 0" rpy = "-1.5707 0 0"/>
         <geometry>
-          <cylinder radius = ".07" length = ".05"/>
+          <cylinder radius = ".02921" length = ".0254"/>
         </geometry>
       </collision>
       
       <visual name = "visual">
-        <origin xyz = "0 0 0" rpy = "-3.14159 0 0"/>
+        <origin xyz = "0 0 0" rpy = "-1.5707 0 0"/>
         <geometry>
-         <cylinder radius = ".07" length = ".05"/>
+         <cylinder radius = ".02921" length = ".0254"/>
         </geometry>
       </visual>
     

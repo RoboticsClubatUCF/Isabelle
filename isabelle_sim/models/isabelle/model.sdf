@@ -236,7 +236,7 @@
     <link name = "dc_link">
       <pose>0.2 0 0.1 0 0 0</pose>
       <collision name = "dc_collision">
-      	<pose> 0.2 0 0.1 0 0</pose>
+      	<pose> 0.2 0 0.1 0 0 0</pose>
         <geometry> 
           <box> 
           <size> 0.02 0.1016 0.02 </size> 
@@ -245,7 +245,7 @@
       </collision> 
       
       <visual name = "dc_visual">
-        <pose> 0.2 0 0.1 0 0 </pose>
+        <pose> 0.2 0 0.1 0 0 0</pose>
         <geometry> 
         	<box> 
           	<size> 0.02 0.1016 0.02 </size> 
@@ -302,7 +302,7 @@
                     <pointCloudTopicName>depth/points</pointCloudTopicName>
 
                     <!-- Set TF frame name. If empty, defaults to link name (i.e. "link_name") -->
-                    <frameName>dc_link</frameName> <!-- namespaced -->
+                    <frameName>isabelle/dc_link</frameName> <!-- namespaced -->
                     
                     <distortionK1>0.0</distortionK1>
                     <distortionK2>0.0</distortionK2>
@@ -346,16 +346,19 @@
       <leftRearJoint>back_left_wheel_hinge</leftRearJoint>
       <rightRearJoint>back_right_wheel_hinge</rightRearJoint>
       <wheelSeparation>0.1524</wheelSeparation>
-      <wheelDiameter>0.215</wheelDiameter>
+      <wheelDiameter>0.5848</wheelDiameter>
       <torque>20</torque>
 
       <odometrySource>world</odometrySource> 
       <publishOdom>true</publishOdom> 
       <updateRate>100</updateRate>
+      <publishOdomTF>false</publishOdomTF>
+      <publishWheelTF>true</publishWheelTF>
+      <odometryFrame>odom</odometryFrame>
 
       <robotBaseFrame>chassis</robotBaseFrame>
       <topicName>cmd_vel</topicName>
-      <broadcastTF>true</broadcastTF>
+      <publishTf>true</publishTf>
   </plugin>
   </model>
 </sdf>
