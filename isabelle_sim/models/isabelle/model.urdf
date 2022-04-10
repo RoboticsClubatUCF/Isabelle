@@ -5,7 +5,7 @@
     <joint name ="back_left_wheel_hinge" type = "revolute">
         <parent link = "chassis"/>
         <child link = "back_left_wheel"/>
-        <origin xyz ="-.09779 -.0762 -.01079" rpy = "0 0 0"/>
+        <origin xyz ="-.09779 -.09 -.01079" rpy = "0 0 0"/>
         <axis xyz = "0 1 0"/>
         <limit lower = "0" upper = "0" effort = "0" velocity = "0"/>
     </joint>
@@ -13,7 +13,7 @@
     <joint name ="back_right_wheel_hinge" type = "revolute">
         <parent link = "chassis"/>
         <child link = "back_right_wheel"/>
-        <origin xyz ="-.09779 .0762 -.01079" rpy = "0 0 0"/>
+        <origin xyz ="-.09779 .09 -.01079" rpy = "0 0 0"/>
         <axis xyz = "0 1 0"/>
         <limit lower = "0" upper = "0" effort = "0" velocity = "0"/>
     </joint>
@@ -21,7 +21,7 @@
     <joint name ="front_left_wheel_hinge" type = "revolute">
         <parent link = "chassis"/>
         <child link = "front_left_wheel"/>    
-        <origin xyz =".09779 -.0762 -.01079" rpy = "0 0 0"/>
+        <origin xyz =".09779 -.09 -.01079" rpy = "0 0 0"/>
         <axis xyz = "0 1 0"/>
         <limit lower = "0" upper = "0" effort = "0" velocity = "0"/>
     </joint>
@@ -29,7 +29,7 @@
     <joint name ="front_right_wheel_hinge" type = "revolute">
         <parent link = "chassis"/>
         <child link = "front_right_wheel"/>
-        <origin xyz =".09779 .0762 -.01079" rpy = "0 0 0"/>
+        <origin xyz =".09779 .09 -.01079" rpy = "0 0 0"/>
         <axis xyz = "0 1 0"/>
         <limit lower = "0" upper = "0" effort = "0" velocity = "0"/>
     </joint>
@@ -155,7 +155,7 @@
     <joint name = "imu joint" type = "fixed">
       <parent link = "chassis"/>
       <child link = "imu_link"/>
-      <origin xyz = "0 0 0.1"/>
+      <origin xyz = "0 0 0.045"/>
     </joint>
 
     <link name =  "imu_link">
@@ -177,7 +177,7 @@
     <joint name = "camera_joint" type = "fixed">
       <parent link = "chassis"/>
       <child link = "camera_link"/>
-      <origin xyz = "0.0 0.0 0.385" rpy = "1.5708 3.14159 1.5708"/>
+      <origin xyz = "0.0 0.0 0.03" rpy = "1.5708 1.5708 1.5708"/>
       <axis xyz = "0 1 0"/>
       <limit lower = "0" upper = "0" effort = "0" velocity = "0"/>
     </joint>
@@ -185,14 +185,14 @@
     <link name =  "camera_link">
       
       <collision name = "camera_collision">
-        <pose> 0.2 0 0.1 0 0</pose>
+        <pose> 0.0 0.0 0.03 0 0 0</pose>
         <geometry> 
           <box size = "0.02 0.09 0.02" /> 
         </geometry> 
       </collision> 
       
       <visual name = "camera_visual">
-       <pose> 0.2 0 0.1 0 0 </pose>
+       <pose> 0.0 0.0 0.03 0 0 0 </pose>
         <geometry> 
          <box size = "0.02 0.09 0.02" /> 
         </geometry> 
