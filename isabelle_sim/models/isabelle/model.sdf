@@ -23,6 +23,18 @@
        
       <link name="back_left_wheel">
         <pose>-.09779 -.09 -.01079 0 1.5707 1.5707</pose>
+          <inertial>
+                <mass>0.45</mass>
+                <pose>0 0 0 0 0 0</pose>
+                <inertia>
+                    <ixx>0.00007</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.00007</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.000018375</izz>
+                </inertia>
+          </inertial>
         <collision name="back_left_collision">
           <geometry>
             <cylinder>
@@ -39,7 +51,7 @@
                     <slip2>0.0</slip2>
                     </ode>
                 </friction>
-                </surface>
+          </surface>
         </collision>
 
         <visual name="back_left_visual">
@@ -64,6 +76,18 @@
 
       <link name="back_right_wheel">
         <pose>-.09779 .09 -.01079  0 1.5707 1.5707</pose>
+          <inertial>
+                <mass>0.45</mass>
+                <pose>0 0 0 0 0 0</pose>
+                <inertia>
+                    <ixx>0.00007</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.00007</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.000018375</izz>
+                </inertia>
+          </inertial>
         <collision name="back_right_collision">
           <geometry>
             <cylinder>
@@ -106,7 +130,18 @@
 
       <link name="front_left_wheel">
         <pose>.09779 -0.09 -.01079 0 1.5707 1.5707</pose>
-        
+          <inertial>
+                <mass>0.45</mass>
+                <pose>0 0 0 0 0 0</pose>
+                <inertia>
+                    <ixx>0.00007</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.00007</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.000018375</izz>
+                </inertia>
+          </inertial>
         <collision name="front_left_collision">
           <geometry>
             <cylinder>
@@ -148,7 +183,18 @@
 
       <link name="front_right_wheel">
         <pose>.09779 0.09 -.01079 0 1.5707 1.5707</pose>
-        
+          <inertial>
+                <mass>0.45</mass>
+                <pose>0 0 0 0 0 0</pose>
+                <inertia>
+                    <ixx>0.00007</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.00007</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.000018375</izz>
+                </inertia>
+          </inertial>
         <collision name="front_right_collision">
           <geometry>
             <cylinder>
@@ -223,14 +269,14 @@
       <child>imu_link</child>
     </joint>
     
-    <joint name="dc_joint" type="fixed">
-      <child>dc_link</child>
+    <joint name="camera_joint" type="fixed">
+      <child>camera_link</child>
       <parent>chassis</parent>
     </joint>
     
-    <link name = "dc_link">
+    <link name = "camera_link">
       <pose>0.0 0.0 0.03 0 0 0</pose>
-      <collision name = "dc_collision">
+      <collision name = "camera_collision">
         <geometry> 
           <box> 
           <size> 0.02 0.09 0.02 </size> 
@@ -238,7 +284,7 @@
         </geometry> 
       </collision> 
       
-      <visual name = "dc_visual">
+      <visual name = "camera_visual">
         <geometry> 
         	<box> 
           	<size> 0.02 0.09 0.02 </size> 
@@ -246,12 +292,12 @@
         </geometry>
       </visual>
       
-      <sensor type = "depth" name = "depth_camera">      	
+      <sensor type = "camera" name = "camera">      	
       	<always_on>0</always_on>
         <updateRate>20</updateRate>
 
-        <camera name="isabelle_dc">
-         	<horizontal_fov>1.57079</horizontal_fov>
+        <camera name="camera">
+         	<horizontal_fov>0.925024504</horizontal_fov>
           <image>
           	<width>640</width>
             <height>480</height>
@@ -270,33 +316,25 @@
           </distortion>
         </camera>
         
-        <plugin name = "isabelle_dc_plugin" filename ="libgazebo_ros_depth_camera.so">
-                    <robotNamespace>isabelle</robotNamespace>
-                    <always_on>true</always_on>
-                    <updateRate>20</updateRate> 
-                    <cameraName>isabelle_dc</cameraName>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>isabelle/camera</cameraName>
+        <imageTopicName>image</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+        <hackBaseline>0.07</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
 
-                    <baseline>0.05</baseline>
-                    <pointCloudCutoff>0.05</pointCloudCutoff>
-                    <pointCloudCutoffMax>20</pointCloudCutoffMax>
-
-                    <imageTopicName>image</imageTopicName>
-                    <cameraInfoTopicName>image/camera_info</cameraInfoTopicName>
-                    <depthImageTopicName>depth/image</depthImageTopicName>
-                    <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
-                    <pointCloudTopicName>depth/points</pointCloudTopicName>
-                    <frameName>isabelle/dc_link</frameName>
-                    
-                    <distortionK1>0.0</distortionK1>
-                    <distortionK2>0.0</distortionK2>
-                    <distortionK3>0.0</distortionK3>
-                    <distortionT1>0.0</distortionT1>
-                    <distortionT2>0.0</distortionT2>
-       </plugin>
       </sensor>
     </link>
 
-    <!-- <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
       <robotNamespace>isabelle</robotNamespace>
       <rosDebugLevel>debug</rosDebugLevel>
 
@@ -305,8 +343,8 @@
       <leftRearJoint>back_left_wheel_hinge</leftRearJoint>
       <rightRearJoint>back_right_wheel_hinge</rightRearJoint>
       <wheelSeparation>0.1524</wheelSeparation>
-      <wheelDiameter>0.5848</wheelDiameter>
-      <torque>20</torque>
+      <wheelDiameter>0.05848</wheelDiameter>
+      <torque>1</torque>
 
       <odometrySource>world</odometrySource> 
       <publishOdom>true</publishOdom> 
@@ -318,7 +356,7 @@
       <robotBaseFrame>chassis</robotBaseFrame>
       <topicName>cmd_vel</topicName>
       <publishTf>true</publishTf>
-  </plugin> -->
+  </plugin>
   
   
   </model>

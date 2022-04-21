@@ -35,11 +35,12 @@
     </joint>
 
     <link name = "chassis">
-        <!--<inertial>
-            <mass value = "2.25"/>
+        <inertial>
+            <mass value = "0.68"/>
             <origin xyz = "0 0 0" rpy = "0 0 0"/>
-            <inertia ixx = ".0322" ixy = "0" ixz = "0" iyy = ".0378" iyz = "0" izz = "0.01"/> < inertias are tricky: http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model#Joint_Dynamics
-        </inertial>-->
+            <inertia ixx = ".00140" ixy = "0" ixz = "0" iyy = ".00373" iyz = "0" izz = ".00495"/> 
+            <!-- inertias are tricky: http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model#Joint_Dynamics -->
+        </inertial>
 
         <collision name="collision">
             <origin xyz = "0 0 0" rpy = "0 0 0"/>
@@ -159,7 +160,7 @@
     </joint>
 
     <link name =  "imu_link">
-      <pose> 0 0 0.1</pose>
+      <pose> 0.2 0 0.1</pose>
       <visual>
         <geometry>
           <box size = "0.01 0.01 0.01"/>
@@ -177,7 +178,7 @@
     <joint name = "camera_joint" type = "fixed">
       <parent link = "chassis"/>
       <child link = "camera_link"/>
-      <origin xyz = "0.0 0.0 0.03" rpy = "1.5708 1.5708 1.5708"/>
+      <origin xyz = "0.2 0.0 0.03" rpy = "1.5708 1.5708 1.5708"/>
       <axis xyz = "0 1 0"/>
       <limit lower = "0" upper = "0" effort = "0" velocity = "0"/>
     </joint>
@@ -185,14 +186,14 @@
     <link name =  "camera_link">
       
       <collision name = "camera_collision">
-        <pose> 0.0 0.0 0.03 0 0 0</pose>
+        <pose> 0.2 0.0 0.03 0 0 0</pose>
         <geometry> 
           <box size = "0.02 0.09 0.02" /> 
         </geometry> 
       </collision> 
       
       <visual name = "camera_visual">
-       <pose> 0.0 0.0 0.03 0 0 0 </pose>
+       <pose> 0.2 0.0 0.03 0 0 0 </pose>
         <geometry> 
          <box size = "0.02 0.09 0.02" /> 
         </geometry> 
