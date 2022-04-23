@@ -235,7 +235,7 @@
       </joint>
     
     <link name = "imu_link">
-      <pose> 0 0 0.045</pose>
+      <pose> -0.1 0 0.045</pose>
       <visual name = "imu_visual">
         <geometry>
           <box>
@@ -269,13 +269,8 @@
       <child>imu_link</child>
     </joint>
     
-    <joint name="camera_joint" type="fixed">
-      <child>camera_link</child>
-      <parent>chassis</parent>
-    </joint>
-    
     <link name = "camera_link">
-      <pose>0.0 0.0 0.03 0 0 0</pose>
+      <pose>-0.1 0.0 0.03 0 0 0</pose>
       <collision name = "camera_collision">
         <geometry> 
           <box> 
@@ -334,6 +329,65 @@
       </sensor>
     </link>
 
+    <joint name="camera_joint" type="fixed">
+      <child>camera_link</child>
+      <parent>chassis</parent>
+    </joint>    
+
+    <link name = "hokuyo_link">
+      <pose>0 0 0.0481 0 0 0</pose>
+        <collision name = "hokuyo_collision">
+          <geometry> 
+            <box>
+              <size>0.0508 0.0508 0.0762</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name = "hokuyo_visual">
+          <geometry> 
+            <box>
+              <size>0.0508 0.0508 0.0762</size>
+            </box>
+          </geometry>
+        </visual>
+
+        <sensor type = "ray" name = "hokuyo_sensor">
+          <visualize>false</visualize>
+          <updateRate>40</updateRate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1080</samples>
+                <resolution>0.25</resolution>
+                <min_angle>-2.3561945</min_angle>
+                <max_angle>2.3561945</max_angle>
+              </horizontal>
+            </scan>
+            <range> 
+              <min>0.10</min>
+              <max>30</max>
+              <resolution>0.01</resolution>
+            </range>
+            <noise>
+              <type>gaussian</type>
+              <mean>0.0</mean>
+              <stddev>0.01</stddev>
+            </noise>
+          </ray>
+          
+          <plugin name = "hokuyo_plugin" filename = "libgazebo_ros_laser.so">
+            <topicName>isabelle/laserscan</topicName>
+            <frameName>hokuyo_link</frameName>
+          </plugin>
+        </sensor>
+    </link>
+
+    <joint name = "hokuyo_joint" type = "fixed">
+      <child>hokuyo_link</child>
+      <parent>chassis</parent>
+    </joint>
+
     <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
       <robotNamespace>isabelle</robotNamespace>
       <rosDebugLevel>debug</rosDebugLevel>
@@ -343,8 +397,8 @@
       <leftRearJoint>back_left_wheel_hinge</leftRearJoint>
       <rightRearJoint>back_right_wheel_hinge</rightRearJoint>
       <wheelSeparation>0.1524</wheelSeparation>
-      <wheelDiameter>0.05848</wheelDiameter>
-      <torque>1</torque>
+      <wheelDiameter>0.05842</wheelDiameter>
+      <torque>1.5</torque>
 
       <odometrySource>world</odometrySource> 
       <publishOdom>true</publishOdom> 
