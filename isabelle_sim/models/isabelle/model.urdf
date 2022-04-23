@@ -203,7 +203,7 @@
     <joint name ="hokuyo_joint" type = "fixed">
       <parent link = "chassis"/>
       <child link = "hokuyo_link"/>
-      <origin xyz = "0.0 0.0 0.0481" rpy = "0 0 0"/>
+      <origin xyz = "0.0 0.0 0.0481" rpy = "0 0 1.5708"/>
       <axis xyz = "0 1 0"/>
       <limit lower = "0.0" upper = "0.0" effort = "0.0" velocity = "0.0"/>
     </joint> 
