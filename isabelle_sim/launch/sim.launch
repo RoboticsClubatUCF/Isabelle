@@ -26,21 +26,13 @@
     <!-- publish tf transforms between joints -->
     <node name = "joint_state_publisher" pkg = "joint_state_publisher" type = "joint_state_publisher"/>
 
-    <!-- We need to launch the ekf_localization node using the parameters in /config-->
-    <node name = "ekf_filter_node" pkg = "robot_localization" type = "ekf_localization_node" output = "screen">
-        <param name="map_frame" value="isabelle/map"/>
-        <param name="odom_frame" value="isabelle/odom"/>
-        <param name="base_link_frame" value="isabelle/base_link"/>
-        <param name="world_frame" value="isabelle/odom"/>
-    </node>
     <!-- launch rviz with specified configuration (if CLI arg is true)-->
 
     <!-- We need to launch the slam node using the parameters in /config-->
 
     <!-- publishes the pose (geometry_msgs/PoseWithCovarianceStamped) of robot from simulation plugin (nav_msgs/Odometry) -->
     <!-- <node pkg="ugv_sim" type="pose_publisher.py" name="pose_publisher" output="screen" /> -->
-     <include 
-        file="$(find isabelle_nav)/launch/isabelle_move_base.launch"> 
+    <include file="$(find isabelle_nav)/launch/nav.launch"> 
     </include>
     
 </launch> 
