@@ -1,0 +1,21 @@
+<?xml version = "1.0"?>
+
+<launch>
+
+    <rosparam command="load" file="$(find isabelle_nav)/localization/slam.yaml"/>
+
+    <node pkg = "move_base" type = "move_base" respawn = "false" name = "move_base" output = "screen">
+        <rosparam file = "$(find isabelle_nav)/costmap_params/costmap_common_params.yaml" command = "load" ns = "global_costmap" />
+        <rosparam file = "$(find isabelle_nav)/costmap_params/costmap_common_params.yaml" command = "load" ns = "local_costmap"/>
+        <rosparam file = "$(find isabelle_nav)/costmap_params/local_costmap_params.yaml" command = "load" />
+        <rosparam file = "$(find isabelle_nav)/costmap_params/global_costmap_params.yaml" command = "load" />
+        <rosparam file = "$(find isabelle_nav)/costmap_params/base_local_planner_params.yaml" command = "load" />
+    </node>
+
+    <rosparam command="load" file="$(find isabelle_nav)/localization/ekf.yaml" />
+    <node name = "ekf_filter_node" pkg = "robot_localization" type = "ekf_localization_node" output = "screen">
+    </node>
+
+</launch>
+
+<!-- REFF: http://wiki.ros.org/navigation/Tutorials/RobotSetup#Navigation_Stack_Setup  -->

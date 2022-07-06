@@ -10,8 +10,8 @@ ceres_loss_function: None
 # ROS Parameters
 odom_frame: odom
 map_frame: map
-base_frame: base_footprint
-scan_topic: /scan
+base_frame: chassis
+scan_topic: isabelle/laserscan
 mode: mapping #localization
 
 # if you'd like to start localizing on bringup in a map and pose
