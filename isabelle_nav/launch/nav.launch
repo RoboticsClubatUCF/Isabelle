@@ -2,22 +2,21 @@
 
 <launch>
 
-    
-
     <node pkg = "move_base" type = "move_base" respawn = "false" name = "move_base" output = "screen">
-        <rosparam file = "$(find isabelle_nav)/costmap_params/costmap_common_params.yaml" command = "load" ns = "global_costmap" />
-        <rosparam file = "$(find isabelle_nav)/costmap_params/costmap_common_params.yaml" command = "load" ns = "local_costmap"/>
-        <rosparam file = "$(find isabelle_nav)/costmap_params/local_costmap_params.yaml" command = "load" />
-        <rosparam file = "$(find isabelle_nav)/costmap_params/global_costmap_params.yaml" command = "load" />
-        <rosparam file = "$(find isabelle_nav)/costmap_params/base_local_planner_params.yaml" command = "load" />
+        <rosparam file = "$(find isabelle_nav)/config/costmap_params/costmap_common_params.yaml" command = "load" ns = "global_costmap" />
+        <rosparam file = "$(find isabelle_nav)/config/costmap_params/costmap_common_params.yaml" command = "load" ns = "local_costmap"/>
+        <rosparam file = "$(find isabelle_nav)/config/costmap_params/local_costmap_params.yaml" command = "load" />
+        <rosparam file = "$(find isabelle_nav)/config/costmap_params/global_costmap_params.yaml" command = "load" />
+        <rosparam file = "$(find isabelle_nav)/config/costmap_params/base_local_planner_params.yaml" command = "load" />
+        <remap from ="/odom" to="/odometry/filtered"/>
     </node>
 
-    <rosparam command="load" file="$(find isabelle_nav)/localization/ekf.yaml" />
+    <rosparam command="load" file="$(find isabelle_nav)/config/localization/ekf.yaml" />
     <node name = "ekf_filter_node" pkg = "robot_localization" type = "ekf_localization_node" output = "screen">
     </node>
 
     <node pkg="slam_toolbox" type="async_slam_toolbox_node" name="slam_toolbox" output="screen">
-        <rosparam command="load" file="$(find isabelle_nav)/localization/slam.yaml"/>
+        <rosparam command="load" file="$(find isabelle_nav)/config/localization/slam.yaml"/>
     </node>
 
 </launch>
