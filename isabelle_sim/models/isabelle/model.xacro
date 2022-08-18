@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<!-- property + name of model -->
+<robot xmlns:xacro="http:www.ros.org/wiki/xacro" name= "isabelle">
+
+<!-- CONSTANTS -->
+    <xacro:property name="wheel_separation" value=""/>
+    <xacro:property name="wheel_radius" value="0.02921"/>
+    <xacro:property name="wheel_length" value=".0254"/>
+    <xacro:property name="body_length" value="0.254"/>
+    <xacro:property name="body_width" value="0.1524"/>
+    <xacro:property name="body_height" value="0.04"/>
+    <xacro:property name="imu_height" value=""/>
+    <xacro:property name="imu_length" value=""/>
+    <xacro:property name="imu_fov" value=""/>
+    
+    <xacro:macro name="default_wheel_inertial" params="mass">
+            <inertial>
+                    <mass value="${mass}" />
+                    <mass value = ".045"/>
+                <origin xyz = "0 0 0" rpy = "0 0 0"/>
+                <inertia ixx = ".00007" ixy = "0" ixz = "0" 
+                        iyy = ".00007" iyz = "0" izz = ".000018375"/>
+            </inertial>
+    </xacro:macro>
+
+<!-- CONSTANTS -->
+
+<!-- LINKS & JOINTS -->
+    <link name = "chassis">
+        <visual name="visual">
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+            <geometry>
+                <box size = "${body_length} ${body_width} ${body_height}"/>
+            </geometry>
+        </visual>
+
+        <collision name="collision">
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+            <geometry>
+                <box size = "${body_length} ${body_width} ${body_height}"/>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <mass value = "0.68"/>
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+            <inertia ixx = ".00140" ixy = "0" ixz = "0" iyy = ".00373" iyz = "0" izz = ".00495"/> 
+            <!-- inertias are tricky: http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model#Joint_Dynamics -->
+        </inertial>
+
+    </link>
+    
+    <!-- Back Wheels -->
+    <xacro:macro name= "back_wheel" params="prefix reflect">
+        <link name = "back_${prefix}_wheel">
+            
+            <visual name = "visual">
+                <origin xyz = "0 0 0" rpy = "-1.5707 0 0"/>
+                <geometry>
+                    <cylinder radius = "${wheel_radius}" length = "${wheel_length}"/>
+                </geometry>
+            </visual> 
+
+            <collision name = "collision">
+                <origin xyz = "0 0 0" rpy = "-1.5707 0 0"/>
+                <geometry>
+                    <cylinder radius = "${wheel_radius}" length = "${wheel_length}"/>
+                </geometry>
+            </collision>
+            <xacro:default_wheel_inertial mass="0.045"/>
+            
+        </link>
+
+        <joint name="back_${prefix}_wheel_hinge" type="continuous" >
+            <parent link = "chassis"/>
+            <child link = "back_${prefix}_wheel"/>
+            <origin xyz ="-.09779 ${reflect * .09} -.01079" rpy = "0 0 0"/>
+            <axis xyz = "0 1 0"/>
+            <limit lower = "0" upper = "0" effort = "0" velocity = "0"/>
+        </joint>
+    </xacro:macro>
+    <xacro:back_wheel prefix="right" reflect ="1"/>
+    <xacro:back_wheel prefix="left" reflect ="-1"/>
+    <!-- Back Wheels -->
+
+    <!-- Front Wheels -->
+     <xacro:macro name= "front_wheel" params="prefix reflect">
+        <link name = "front_${prefix}_wheel">
+            <visual name = "visual">
+                <origin xyz = "0 0 0" rpy = "-1.5707 0 0"/>
+                <geometry>
+                    <cylinder radius = "${wheel_radius}" length = "${wheel_length}"/>
+                </geometry>
+            </visual> 
+
+            <collision name = "collision">
+                <origin xyz = "0 0 0" rpy = "-1.5707 0 0"/>
+                <geometry>
+                    <cylinder radius = "${wheel_radius}" length = "${wheel_length}"/>
+                </geometry>
+            </collision>
+            <xacro:default_wheel_inertial mass="0.045"/>
+        </link>
+        
+        <joint name ="front_${prefix}_wheel_hinge" type = "continuous">
+                <parent link = "chassis"/>
+                <child link = "front_${prefix}_wheel"/>    
+                <origin xyz =".09779 ${reflect * .09} -.01079" rpy = "0 0 0"/>
+                <axis xyz = "0 1 0"/>
+                <limit lower = "0" upper = "0" effort = "0" velocity = "0"/>
+        </joint>
+    </xacro:macro>
+    <xacro:front_wheel prefix="right" reflect ="1"/>
+    <xacro:front_wheel prefix="left" reflect ="-1"/>
+    <!-- Front Wheels -->
+
+    <!-- Sensors -->
+    
+    <link name =  "imu_link">
+        <pose> -0.1 0 0.1 0 0 0</pose>
+        <visual>
+            <geometry>
+                <box size = "0.01 0.01 0.01"/>
+            </geometry>
+        </visual>
+
+        <collision>
+            <geometry>
+                <box size = "0.01 0.01 0.01"/>
+            </geometry>
+        </collision>
+    
+    </link>
+   
+    <joint name = "imu_joint" type = "fixed">
+        <parent link = "chassis"/>
+        <child link = "imu_link"/>
+        <origin xyz = "-0.1 0 0.045"/>
+    </joint>
+
+    <link name =  "camera_link">
+      
+        <visual name = "camera_visual">
+            <pose> -0.1 0.0 0.03 0 0 0 </pose>
+            <geometry> 
+                <box size = "0.02 0.09 0.02" /> 
+            </geometry> 
+        </visual>
+        
+        <collision name = "camera_collision">
+            <pose> -0.1 0.0 0.03 0 0 0</pose>
+            <geometry> 
+                <box size = "0.02 0.09 0.02" /> 
+            </geometry> 
+        </collision> 
+        
+    </link>
+    
+    <joint name = "camera_joint" type = "fixed">
+        <parent link = "chassis"/>
+        <child link = "camera_link"/>
+        <origin xyz = "-0.1 0.0 0.03" rpy = "1.5708 1.5708 1.5708"/>
+        <axis xyz = "0 1 0"/>
+        <limit lower = "0" upper = "0" effort = "0" velocity = "0"/>
+    </joint>
+
+
+    <link name = "hokuyo_link">
+
+        <collision name = "hokuyo_collision">
+            <pose> 0.0 0.0 0.0481 0 0 0 </pose>
+            <geometry> 
+                <box size = "0.0508 0.0508 0.0762"/>
+            </geometry>
+        </collision>
+
+        <visual name = "hokuyo_visual">
+            <pose> 0.0 0.0 0.0481 0 0 0 </pose>
+                <geometry> 
+                    <box size = "0.0508 0.0508 0.0762"/> 
+                </geometry> 
+        </visual>
+    </link>
+
+    <joint name ="hokuyo_joint" type = "fixed">
+        <parent link = "chassis"/>
+        <child link = "hokuyo_link"/>
+        <origin xyz = "0.0 0.0 0.0481" rpy = "0 0 1.5708"/>
+        <axis xyz = "0 1 0"/>
+        <limit lower = "0.0" upper = "0.0" effort = "0.0" velocity = "0.0"/>
+    </joint>
+    <!-- Sensors -->
+
+<!-- LINKS & JOINTS-->
+ 
+ <gazebo>
+    <plugin name="wb_plugin" filename="libwb_plugin.so"> </plugin>
+  </gazebo>
+
+</robot>

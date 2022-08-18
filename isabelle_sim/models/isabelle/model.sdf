@@ -292,14 +292,14 @@
         <updateRate>20</updateRate>
 
         <camera name="camera">
-         	<horizontal_fov>0.925024504</horizontal_fov>
+         	<horizontal_fov>0.03703703704</horizontal_fov>
           <image>
           	<width>640</width>
             <height>480</height>
           </image>
           <clip>
           	<near>0.5</near>
-            <far>25</far>
+            <far>2</far>
           </clip>
           <distortion>
             <k1>0.0</k1>
