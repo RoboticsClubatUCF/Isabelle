@@ -13,7 +13,7 @@ import rospy
 from pynput import keyboard
 from geometry_msgs.msg import Twist
 
-motor_pub = rospy.Publisher('isabelle/cmd_vel', Twist, queue_size=100)  # creating publisher for topic /cmd_vel (that the robot subscribes to)
+motor_pub = rospy.Publisher('cmd_vel', Twist, queue_size=100)  # creating publisher for topic /cmd_vel (that the robot subscribes to)
 
 # Twist message to be published, modified by on_press and on_release
 twist = Twist()

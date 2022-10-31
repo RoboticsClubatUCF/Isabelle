@@ -1,9 +1,12 @@
 <launch>
     <param name="/use_sim_time" value="true" />
     <!-- configure any CLI arguments -->
-    <arg name = "robot_desc" default = "$(find isabelle_sim)/models/isabelle/model.urdf"/>
+    <arg name = "robot_desc" default = "$(find isabelle_sim)/models/isabelle_2/model.urdf.xacro"/>
     <arg name = "world" default = "empty"/>
     <arg name = "gazebo" default = "true" />
+    <arg name = "rviz_cfg" default = "$(find isabelle_sim)/rviz/config.rviz"/>
+    <arg name = "rviz" default = "true"/>
+    <arg name = "robot" default = "isabelle_2"/>
 
     <!-- launch gazebo_ros -->
     <include file = "$(find gazebo_ros)/launch/empty_world.launch">
@@ -16,22 +19,32 @@
         <arg name = "verbose" value = "true"/>
     </include>
 
+    <!-- Launch rviz -->
+    <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_cfg)"/>
+
     <!-- load robot description to parameter server (for robot_state_publisher) -->
-    <param name = "robot_description" textfile = "$(arg robot_desc)"/>
+    <param name = "robot_description" command="$(find xacro)/xacro $(arg robot_desc)"/>
+    
     <!-- use robot description to publish robot tf tree -->
     <node name = "robot_state_publisher" pkg = "robot_state_publisher" type = "robot_state_publisher">
         <param name = "tf_prefix_" type = "string" value = "isabelle"/>
     </node>
 
+    <group if="$(eval arg('world') == 'empty')">
+        <node pkg="gazebo_ros" type="spawn_model" name="spawn_$(arg robot)"
+            args="-param robot_description -urdf -model $(arg robot)
+                -x 0.0 -y 0.0 -z 0.0 -Y 0.0" respawn="false"/>
+    </group>
+    <group if="$(eval arg('world') == 'maze')">
+        <node pkg="gazebo_ros" type="spawn_model" name="spawn_$(arg robot)"
+            args="-param robot_description -urdf -model $(arg robot)
+                -x 0.735536 -y -0.509126 -z 0.499096 -Y 0.0" respawn="false"/>
+    </group>
+
+
     <!-- publish tf transforms between joints -->
     <node name = "joint_state_publisher" pkg = "joint_state_publisher" type = "joint_state_publisher"/>
 
-    <!-- launch rviz with specified configuration (if CLI arg is true)-->
-
-    <!-- We need to launch the slam node using the parameters in /config-->
-
-    <!-- publishes the pose (geometry_msgs/PoseWithCovarianceStamped) of robot from simulation plugin (nav_msgs/Odometry) -->
-    <!-- <node pkg="ugv_sim" type="pose_publisher.py" name="pose_publisher" output="screen" /> -->
     <include file="$(find isabelle_nav)/launch/nav.launch"> 
     </include>
     

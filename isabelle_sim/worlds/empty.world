@@ -40,9 +40,5 @@
       </body:heightmap>
     </model:physical> -->
 
-    <include>
-      <uri>model://isabelle</uri>
-    </include>
-
   </world>
 </sdf>
