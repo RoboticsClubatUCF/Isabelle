@@ -52,7 +52,7 @@
 
             <!-- plugin characteristics -->
             <odometrySource>encoder</odometrySource> 
-            <publishOdom>true</publishOdom> 
+            <publishOdom>false</publishOdom> 
             <updateRate>100</updateRate>
 
             <!-- tf -->

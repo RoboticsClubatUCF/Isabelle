@@ -38,7 +38,7 @@
     <group if="$(eval arg('world') == 'maze')">
         <node pkg="gazebo_ros" type="spawn_model" name="spawn_$(arg robot)"
             args="-param robot_description -urdf -model $(arg robot)
-                -x 0.735536 -y -0.509126 -z 0.499096 -Y 0.0" respawn="false"/>
+                -x 3.163172 -y -0.451179 -z 0.499096 -Y 0.0" respawn="false"/>
     </group>
 
 

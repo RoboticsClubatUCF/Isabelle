@@ -1,7 +1,7 @@
 hector_slam:
   base_frame: base_link
   map_frame: map
-  odom_frame: odom
+  odom_frame: base_link
   map_resolution: 0.025
   map_size: 1024
   map_start_x: 0.5
@@ -16,8 +16,9 @@ hector_slam:
   laser_max_dist: 30.0 
   laser_z_min_value: -0.1
   laser_z_max_value:  1
-  pub_map_odom_transform: false
+  pub_map_odom_transform: true
   output_timing: false
+  pub_odometry: true
   scan_subscriber_queue_size: 5
-  pub_map_scanmatch_transform: false
+  pub_map_scanmatch_transform: true
   tf_map_scanmatch_transform_frame_name: scanmatcher_frame

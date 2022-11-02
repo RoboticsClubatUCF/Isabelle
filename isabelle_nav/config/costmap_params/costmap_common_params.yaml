@@ -4,7 +4,7 @@ raytrace_range: 3.0
 footprint: [[0.254, 0.1524], [0.254, -0.1524], [-0.254, -0.1524], [-0.254, 0.1524]]
 
 #robot_radius: ir_of_robot
-inflation_radius: 0.2
+inflation_radius: 0.06
 
 plugins:
   - {name: obstacles_2d,      type: "costmap_2d::ObstacleLayer"}
