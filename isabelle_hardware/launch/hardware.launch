@@ -1,0 +1,10 @@
+<launch>
+	<node pkg="isabelle_hardware" type="motor_bridge.py" name="motor_bridge" output="screen"/>
+	
+	<!-- launch our lidar node -->
+	<node name="urg_node" pkg="urg_node" type="urg_node">
+		<remap from="scan" to="isabelle/laserscan"/>
+	</node>
+	
+	
+</launch> 

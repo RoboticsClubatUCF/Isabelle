@@ -22,7 +22,7 @@ obstacles_2d:
   laserscan:
     data_type: LaserScan
     topic: isabelle/laserscan
-    sensor_frame: hokuyo_link
+    sensor_frame: laser
     # expected_update_rate: 0.05 # VERY conservative, actual is ~700Hz
     # observation_persistence: 0.0
     marking: true

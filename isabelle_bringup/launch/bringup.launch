@@ -1,0 +1,30 @@
+<launch> 
+	
+	<arg name = "robot_desc" default = "$(find isabelle_sim)/models/isabelle_2/model.urdf.xacro"/>
+	
+	<arg name = "rviz_cfg" default = "$(find isabelle_sim)/rviz/config.rviz"/>
+    	<arg name = "rviz" default = "true"/>
+       
+       <!-- load robot description to parameter server (for robot_state_publisher) -->
+       <param name = "robot_description" command="$(find xacro)/xacro $(arg robot_desc)"/>
+       
+       <!-- use robot description to publish robot tf tree -->
+       <node name = "robot_state_publisher" pkg = "robot_state_publisher" type = "robot_state_publisher">
+       	<param name = "tf_prefix_" type = "string" value = "isabelle"/>
+       </node>
+       
+       <!-- publish tf between joints -->
+       <node name = "joint_state_publisher" pkg = "joint_state_publisher" type = "joint_state_publisher"/>
+       
+       <!-- Launch nav stack -->
+       <include file="$(find isabelle_nav)/launch/nav.launch"> 
+       </include>
+       
+       <!-- Launch hardware -->
+       <include file="$(find isabelle_hardware)/launch/hardware.launch">
+       </include>
+       
+        <!-- Launch rviz -->
+    	<node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_cfg)"/>
+
+</launch> 

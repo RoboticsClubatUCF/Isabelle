@@ -64,12 +64,12 @@
     <xacro:caster_joint name="back_right_caster" x_offset="${wheel_offset_x}" y_offset="${wheel_offset_y}" z_offset="${wheel_offset_z}" reflect_x="-1" reflect_y="-1"/>
     
     <!-- lidar link -->
-    <xacro:box_total name="hokuyo_link" mass="${lidar_mass}" width="${lidar_width}" height="${lidar_height}" length="${lidar_width}"/>
-    <joint name="hokuyo_joint" type="fixed">
-        <gazebo reference="hokuyo_joint">
+    <xacro:box_total name="laser" mass="${lidar_mass}" width="${lidar_width}" height="${lidar_height}" length="${lidar_width}"/>
+    <joint name="laser_joint" type="fixed">
+        <gazebo reference="laser_joint">
         </gazebo>
         <parent link="base_link"/>
-        <child link="hokuyo_link"/>
+        <child link="laser"/>
         <origin xyz="${lidar_offset_x} ${lidar_offset_y} ${lidar_offset_z}" rpy="0 0 0" />
     </joint>
 
