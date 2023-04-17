@@ -1,10 +1,8 @@
-obstacle_range: 2.5
-raytrace_range: 3.0
 
-footprint: [[0.254, 0.1524], [0.254, -0.1524], [-0.254, -0.1524], [-0.254, 0.1524]]
+footprint: [[0.26, 0.16], [0.26, -0.16], [-0.26, -0.16], [-0.26, 0.16]]
 
 #robot_radius: ir_of_robot
-inflation_radius: 0.06
+inflation_radius: 0.15
 
 plugins:
   - {name: obstacles_2d,      type: "costmap_2d::ObstacleLayer"}
@@ -16,15 +14,15 @@ obstacles_2d:
   z_resolution:           0.02
   combination_method:     1      # 1=max, 0=override
   track_unknown_space:    true   # default space is unknown
-  obstacle_range:         3.0    # meters
-  raytrace_range:         3.5
+  obstacle_range:         5.0    # meters
+  raytrace_range:         5.1
   observation_sources: laserscan
   laserscan:
     data_type: LaserScan
     topic: isabelle/laserscan
     sensor_frame: laser
     # expected_update_rate: 0.05 # VERY conservative, actual is ~700Hz
-    # observation_persistence: 0.0
+    #observation_persistence: 0.0
     marking: true
     clearing: true
     max_obstacle_height: 2.0

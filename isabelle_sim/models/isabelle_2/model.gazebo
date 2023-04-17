@@ -86,7 +86,7 @@
     </gazebo>
 
     <!-- lidar simulation plugin -->
-    <gazebo reference="hokuyo_link">
+    <gazebo reference="laser">
         <sensor name="hokuyo_sensor" type="ray">
             <ray>
                 <scan>
@@ -112,7 +112,7 @@
             <plugin name="hokuyo_plugin" filename="libgazebo_ros_laser.so">
                 <robotNamespace>${robot}</robotNamespace>
                 <topicName>/isabelle/laserscan</topicName>
-                <frameName>hokuyo_link</frameName>
+                <frameName>laser</frameName>
             </plugin>
         </sensor>
     </gazebo>
