@@ -16,6 +16,9 @@
         <rosparam file = "$(find isabelle_nav)/config/costmap_params/base_local_planner_params.yaml" command = "load" />
         <rosparam file = "$(find isabelle_nav)/config/costmap_params/global_planner_params.yaml" command="load"/>
     </node>
+    
+    <node pkg="isabelle_nav" type="goalSetter.py" name="goalSetter" output="screen"/>
+	
 
 </launch>
 

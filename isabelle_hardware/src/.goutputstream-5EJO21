@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import rospy 
 import RPi.GPIO as GPIO
@@ -15,15 +15,15 @@ MAX_VEL = 2.4
 # Pin Declarations
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(11, GPIO.OUT)
-GPIO.setup(15, GPIO.OUT)
-pinL = GPIO.PWM(11, 1000)
-pinR = GPIO.PWM(15, 1000)
-pinL.start(50)
-pinR.start(50)
+GPIO.setup(13, GPIO.OUT)
+pinL = GPIO.PWM(11, 50)
+pinR = GPIO.PWM(13, 50)
+
+
 # Do math to get motor pwm commands then write commands to pins -> motor controller
 def cmd_vel_cb(cmd_vel):
-	left_vel = cmd_vel.linear.x - (0.5 * cmd_vel.angular.z*3 * WHEEL_BASE)
-	right_vel = cmd_vel.linear.x + (0.5 * cmd_vel.angular.z*3 * WHEEL_BASE)
+	left_vel = cmd_vel.linear.x - (0.5 * cmd_vel.angular.z * WHEEL_BASE)
+	right_vel = cmd_vel.linear.x + (0.5 * cmd_vel.angular.z * WHEEL_BASE)
 	
 	# Get duty cycles
 	
@@ -32,8 +32,8 @@ def cmd_vel_cb(cmd_vel):
 	
 	# Write to pins
 	
-	pinL.start(l_duty)
-	pinR.start(r_duty)
+	pinL.start(49)
+	pinR.start(49)
 
 	
 		

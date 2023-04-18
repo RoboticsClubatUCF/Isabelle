@@ -2,7 +2,7 @@
 footprint: [[0.26, 0.16], [0.26, -0.16], [-0.26, -0.16], [-0.26, 0.16]]
 
 #robot_radius: ir_of_robot
-inflation_radius: 0.15
+inflation_radius: 0.2
 
 plugins:
   - {name: obstacles_2d,      type: "costmap_2d::ObstacleLayer"}

@@ -4,6 +4,8 @@
 	<!-- launch our lidar node -->
 	<node name="urg_node" pkg="urg_node" type="urg_node">
 		<remap from="scan" to="isabelle/laserscan"/>
+		<param name="angle_min" type="double" value="-1.5708"/>
+		<param name="angle_max" type="double" value="1.5708"/>
 	</node>
 	
 	

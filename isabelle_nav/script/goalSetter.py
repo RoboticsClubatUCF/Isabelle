@@ -1,13 +1,11 @@
-#!/usr/bin/env python
-
+#!/usr/bin/python3
 import rospy
 import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
+from geometry_msgs.msg import Point
 
-def movebase_client():
 
-    x = float(input("X: "))
-    y = float(input("Y: "))
+def movebase_client(msg):
 
     client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
     client.wait_for_server()
@@ -15,8 +13,8 @@ def movebase_client():
     goal = MoveBaseGoal()
     goal.target_pose.header.frame_id = "map"
     goal.target_pose.header.stamp = rospy.Time.now()
-    goal.target_pose.pose.position.x = x
-    goal.target_pose.pose.position.y = y
+    goal.target_pose.pose.position.x = msg.x
+    goal.target_pose.pose.position.y = msg.y
     goal.target_pose.pose.orientation.w = 1.0
 
     client.send_goal(goal)
@@ -28,10 +26,11 @@ def movebase_client():
         return client.get_result()
 
 if __name__ == '__main__':
-    try:
-        rospy.init_node('movebase_client_py')
-        result = movebase_client()
-        if result:
-            rospy.loginfo("Goal execution done!")
-    except rospy.ROSInterruptException:
-        rospy.loginfo("Navigation test finished.")
+
+	rospy.init_node('web_bridge_listener')
+	rospy.Subscriber("/cmd_position", Point, movebase_client) 
+
+	while not rospy.is_shutdown():
+		rospy.spin()
+    
+    
